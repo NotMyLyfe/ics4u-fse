@@ -40,10 +40,10 @@ public class Board{
 
     public void draw(Graphics g){
         for (int i = 0; i < hexes.length; i ++){
-            hexes[i].draw(g);
+            hexes[i].drawHex(g);
         }
         for (int i = 0; i < hexes.length; i ++){
-            hexes[i].draw(g);
+            hexes[i].drawSettlements(g);
         }
     }
 }

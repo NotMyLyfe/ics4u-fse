@@ -69,9 +69,9 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
     }
 
     public void getInput(){
-
     }
 
+    @Override
     public void paint(Graphics g){
         if (screen.equals("game")){
             CatanBoard.draw(g);
@@ -83,6 +83,7 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
     }
 
     public void mouseClicked(MouseEvent e) {
+        myTimer.start();
 
     }
 
@@ -97,7 +98,7 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
 
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;
-        myTimer.start();
+
     }
 
     public void keyReleased(KeyEvent e) {

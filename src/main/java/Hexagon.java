@@ -31,7 +31,7 @@ public class Hexagon {
         y = info[1];
     }
 
-    public void draw(Graphics g){
+    public void drawHex(Graphics g){
         int centerx = (int) (zerox + x*size*Math.sqrt(3) - y*size*Math.sqrt(3)/2);
         int centery = zeroy + y*size*3/2;
         int[] xpoints = new int[6];
@@ -74,9 +74,11 @@ public class Hexagon {
             ypoints[i] = (int) (centery + size*Math.sin(Math.PI*i/3+Math.PI/6));
         }
         g.setColor(Color.white);
+        if (x == 1 && y == 1){
+        }
         for (int i = 0; i < 6; i ++){
-            if (!settlements[i].equals("")){
-                g.fillRect(xpoints[i],ypoints[i],10,10);
+            if (!(settlements[i].equals(""))){
+                g.fillOval(xpoints[i],ypoints[i],10,10);
             }
         }
     }
@@ -95,6 +97,5 @@ public class Hexagon {
 
     public void setSettlement(int i, String col){
         settlements[i] = col;
-        System.out.println("hi");
     }
 }
