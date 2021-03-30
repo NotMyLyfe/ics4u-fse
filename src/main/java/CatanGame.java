@@ -80,6 +80,7 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
 
     public void mousePressed(MouseEvent e) {
         CatanBoard.placeSettlement(e.getX(),e.getY());
+        CatanBoard.placeRoad(e.getX(),e.getY());
     }
 
     public void mouseClicked(MouseEvent e) {
