@@ -90,6 +90,7 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
         g.setColor(Color.white);
         g.fillRect(0,0,WIDTH,HEIGHT);
         if (screen.equals("game")){
+            catanPlayer.displayResources(g);
             CatanBoard.draw(g);
             g.setColor(Color.black);
             if (makeTrade){
@@ -178,7 +179,6 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
         if (useDevCard){
             if (900 < x && x < 1000 && 500 < y &&  y < 600){
                 useDevCard = false;
-
             }
         }
 
@@ -208,5 +208,6 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
     }
 
     public void keyTyped(KeyEvent e) {
+
     }
 }

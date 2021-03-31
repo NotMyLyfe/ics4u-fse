@@ -59,5 +59,10 @@ public class Player{
         }
     }
 
-
+    public void displayResources(Graphics g){
+        for (int i = 1; i < 6; i ++){
+            g.setColor(Color.black);
+            g.drawString(""+resources[i],i*100-50,750);
+        }
+    }
 }
