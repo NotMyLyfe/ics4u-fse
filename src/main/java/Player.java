@@ -9,11 +9,11 @@ public class Player{
             BRICK = 5;
     public int[] resources = {0,0,0,0,0,0};
     public Color color;
-    public int turn;
+    public boolean turn;
     public int victory = 0;
 
 
-    public Player(int tt, Color cc){
+    public Player(boolean tt, Color cc){
         turn = tt;
         color = cc;
     }
