@@ -11,12 +11,14 @@ public class Board{
     private int index;
     private boolean placingSettlement = false;
     private boolean placingRoad = false;
+    Font cmcFnt;
 
     private ArrayList<Node> allNodes = new ArrayList<>();
     private ArrayList<Edge> allEdges = new ArrayList<>();
 
 
-    public Board(int[][] info){
+    public Board(int[][] info, Font f){
+        cmcFnt = f;
 
         for (int i = 0; i < info.length; i ++) {
             hexes[i] = new Hexagon(info[i]);
@@ -130,7 +132,7 @@ public class Board{
 
     public void draw(Graphics g){
         for (int i = 0; i < hexes.length; i ++){
-            hexes[i].drawHex(g);
+            hexes[i].drawHex(g,cmcFnt);
         }
         for (int i = 0; i < allEdges.size(); i ++){
             allEdges.get(i).draw(g);

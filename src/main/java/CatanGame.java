@@ -33,6 +33,7 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
     Timer myTimer;
     Image back;
     Font comicFnt;
+    private boolean makeTrade = false;
 
     public static final int WIDTH = 1000, HEIGHT = 800;
 
@@ -55,9 +56,12 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
         setFocusable(true);
         requestFocus();
         //get it from server.
-        CatanBoard = new Board(testboard);
+        CatanBoard = new Board(testboard,comicFnt);
 
     }
+
+
+
 
 
     @Override
@@ -75,12 +79,29 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
     public void paint(Graphics g){
         if (screen.equals("game")){
             CatanBoard.draw(g);
+            g.setColor(Color.black);
+            if (!makeTrade){
+                g.drawRect(700,700,100,100);
+            } else {
+                for (int i = 1; i < 6; i ++){
+                    g.drawRect(i*100+400,700,100,100);
+                }
+            }
+
         }
     }
 
     public void mousePressed(MouseEvent e) {
-        CatanBoard.placeSettlement(e.getX(),e.getY());
-        CatanBoard.placeRoad(e.getX(),e.getY());
+        int x = e.getX();
+        int y = e.getY();
+        CatanBoard.placeSettlement(x,y);
+        CatanBoard.placeRoad(x,y);
+
+        if (700 < x && x < 800 && 700 < y && y < 800 && !makeTrade) {
+            makeTrade = true;
+        }
+
+
     }
 
     public void mouseClicked(MouseEvent e) {

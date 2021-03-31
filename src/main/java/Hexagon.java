@@ -4,7 +4,7 @@ public class Hexagon {
     public int type;
     public int num;
     public int x,y;
-    private final int zerox = 400, zeroy = 200;
+    private final int zerox = 200, zeroy = 200;
     private final int size = 60;
     Image pic;
 
@@ -30,7 +30,7 @@ public class Hexagon {
         y = info[1];
     }
 
-    public void drawHex(Graphics g){
+    public void drawHex(Graphics g, Font f){
         int centerx = (int) (zerox + x*size*Math.sqrt(3) - y*size*Math.sqrt(3)/2);
         int centery = zeroy + y*size*3/2;
         int[] xpoints = new int[6];
@@ -56,10 +56,12 @@ public class Hexagon {
             g.setColor(sand);
         }
 
+
         g.fillPolygon(xpoints, ypoints, 6);
         g.setColor(Color.black);
         g.drawPolygon(xpoints, ypoints, 6);
-
+        g.setFont(f);
+        g.drawString(""+num, centerx-15,centery+10);
     }
 
 
