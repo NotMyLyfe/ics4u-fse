@@ -130,6 +130,30 @@ public class Board{
         return true;
     }
 
+    public void setSettlement(Node n, Color c){
+        for (int i = 0; i < allNodes.size(); i ++){
+            if (allNodes.get(i).equalNode(n)){
+                allNodes.get(i).placeSettlement(c);
+            }
+        }
+    }
+
+    public void setCity(Node n, Color c){
+        for (int i = 0; i < allNodes.size(); i ++){
+            if (allNodes.get(i).equalNode(n)){
+                allNodes.get(i).placeCity();
+            }
+        }
+    }
+
+    public void setRoad(Edge e, Color c){
+        for (int i = 0; i < allEdges.size(); i ++){
+            if (allEdges.get(i).equalEdge(e)){
+                allEdges.get(i).makeRoad(c);
+            }
+        }
+    }
+
     public void draw(Graphics g){
         for (int i = 0; i < hexes.length; i ++){
             hexes[i].drawHex(g,cmcFnt);

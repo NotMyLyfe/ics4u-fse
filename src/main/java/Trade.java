@@ -7,7 +7,7 @@ public class Trade{
             WOOL = 3,
             ORE = 4,
             BRICK = 5;
-    int[] resources = {0,0,0,0,0,0};
+    int[] resources = {0,0,0,0,1,0};
     boolean isTrade = false;
 
     public Trade(){
