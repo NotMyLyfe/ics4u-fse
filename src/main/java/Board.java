@@ -1,3 +1,7 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.ServiceConfigurationError;
@@ -17,40 +21,46 @@ public class Board{
     private ArrayList<Edge> allEdges = new ArrayList<>();
 
 
-    public Board(int[][] info, Font f){
+    public Board(JsonElement info, Font f){
         cmcFnt = f;
 
-        for (int i = 0; i < info.length; i ++) {
-            hexes[i] = new Hexagon(info[i]);
+        for(int y = 0, i = 0; y < 5; y++){
+            for(int x = 0; x < 5; x++){
+                int[] jsonData = new Gson().fromJson(info.getAsJsonArray().get(y).getAsJsonArray().get(x), int[].class);
+                if(jsonData[0] == -1) continue;
+                int[] hexData = {x, y, jsonData[0], jsonData[1]};
+                hexes[i] = new Hexagon(hexData);
 
-            for (int j = 0; j < 6; j ++){
-                boolean inlis = false;
-                Node n = new Node(hexes[i],j);
-                for (int k = 0; k < allNodes.size(); k ++){
-                    if (n.equalNode(allNodes.get(k))){
-                        inlis = true;
-                        break;
+                for (int j = 0; j < 6; j ++){
+                    boolean inlis = false;
+                    Node n = new Node(hexes[i],j);
+                    for (int k = 0; k < allNodes.size(); k ++){
+                        if (n.equalNode(allNodes.get(k))){
+                            inlis = true;
+                            break;
+                        }
+                    }
+                    if (!inlis){
+                        allNodes.add(allNodes.size(),n);
                     }
                 }
-                if (!inlis){
-                    allNodes.add(allNodes.size(),n);
-                }
-            }
 
-            for (int j = 0; j < 6; j ++){
-                boolean inlis = false;
-                Node n1 = new Node(hexes[i],j);
-                Node n2 = new Node(hexes[i],(j+1)%6);
-                Edge e = new Edge(n1,n2);
-                for (int k = 0; k < allEdges.size(); k ++){
-                    if (e.equalEdge(allEdges.get(k))){
-                        inlis = true;
-                        break;
+                for (int j = 0; j < 6; j ++){
+                    boolean inlis = false;
+                    Node n1 = new Node(hexes[i],j);
+                    Node n2 = new Node(hexes[i],(j+1)%6);
+                    Edge e = new Edge(n1,n2);
+                    for (int k = 0; k < allEdges.size(); k ++){
+                        if (e.equalEdge(allEdges.get(k))){
+                            inlis = true;
+                            break;
+                        }
+                    }
+                    if (!inlis){
+                        allEdges.add(allEdges.size(),e);
                     }
                 }
-                if (!inlis){
-                    allEdges.add(allEdges.size(),e);
-                }
+                i++;
             }
         }
     }

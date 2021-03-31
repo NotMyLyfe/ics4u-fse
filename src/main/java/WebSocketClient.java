@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import javax.websocket.ClientEndpoint;
 import com.neovisionaries.ws.client.*;
+
 import com.google.gson.JsonParser;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -15,16 +16,25 @@ public class WebSocketClient {
     private String ip;
     private boolean connected = false, attempted = false;
     private String guid;
-    private List<JsonObject> messages;
+    private volatile List<JsonObject> messages;
 
     public WebSocketClient(String ip){
         WebSocketClient.this.ip = ip;
+        WebSocketClient.this.connect();
+        WebSocketClient.this.messages = new ArrayList<JsonObject>();
     }
 
     public List<JsonObject> getMessages(){
-        List<JsonObject> temp = new ArrayList<>(messages);
-        messages.clear();
+        List<JsonObject> temp = new ArrayList<>();
+        while(!messages.isEmpty()){
+            temp.add(messages.get(0));
+            messages.remove(0);
+        }
         return temp;
+    }
+
+    public boolean isMessagesEmpty(){
+        return messages.isEmpty();
     }
 
     public boolean isConnected(){
@@ -42,6 +52,7 @@ public class WebSocketClient {
     }
 
     public void connect() {
+        WebSocketClient.this.attempted = false;
         try {
             WebSocketClient.this.webSocket = new WebSocketFactory()
                     .setConnectionTimeout(4000)
@@ -51,6 +62,7 @@ public class WebSocketClient {
                         public void onConnected(WebSocket websocket, Map<String, List<String>> headers) {
                             System.out.println("Opened websocket connection successfully!");
                             WebSocketClient.this.connected = true;
+                            WebSocketClient.this.attempted = true;
                         }
 
                         @Override
@@ -75,8 +87,9 @@ public class WebSocketClient {
                                 e.printStackTrace();
                                 return;
                             }
-                            if (jsonObject.has("guid"))
+                            if (jsonObject.has("guid")) {
                                 WebSocketClient.this.guid = jsonObject.get("guid").getAsString();
+                            }
                             WebSocketClient.this.messages.add(jsonObject.deepCopy());
                         }
 
