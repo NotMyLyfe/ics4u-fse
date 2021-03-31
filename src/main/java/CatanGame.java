@@ -29,6 +29,9 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
     boolean[] keys;
     private Board CatanBoard;
     String screen = "game";
+    public boolean initalPieces = true;
+    public String placePiece = "settlement";
+    public boolean isTurn = true;
 
     Timer myTimer;
     Image back;
@@ -37,6 +40,8 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
     private boolean useDevCard = false;
     Trade catanTrade = new Trade();
     int x = 0,y = 0;
+    Image backbutton = new ImageIcon("src/main/java/backbutton.png").getImage();
+    Image sendTrade = new ImageIcon("src/main/java/sendtrade.png").getImage();
 
     public static final int WIDTH = 1000, HEIGHT = 800;
     Player catanPlayer;
@@ -87,18 +92,22 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
 
     @Override
     public void paint(Graphics g){
-        g.setColor(Color.white);
-        g.fillRect(0,0,WIDTH,HEIGHT);
+
         if (screen.equals("game")){
+            back = new ImageIcon("src/main/java/background.png").getImage();
+            g.drawImage(back,0,0,null);
             catanPlayer.displayResources(g);
             CatanBoard.draw(g);
             g.setColor(Color.black);
             if (makeTrade){
                 //draw back
                 g.drawRect(900,500,100,100);
+                g.drawImage(backbutton,900,500,null);
 
                 //send trade
+
                 g.drawRect(800,500,100,100);
+                g.drawImage(sendTrade,800,500,null);
 
 
                 catanTrade.displayTrade(g);
@@ -128,8 +137,34 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
         x = e.getX();
         y = e.getY();
 
-        CatanBoard.placeSettlement(x,y);
-        CatanBoard.placeRoad(x,y);
+        if (!isTurn){
+            if (makeTrade){
+                if (900 < x && x < 1000 && 500 < y && y < 600){
+                    //send to server.
+                    //if it works, update resources
+                }
+            }
+            return;
+        }
+
+        if (initalPieces && placePiece.equals("settlement")){
+            boolean bool = CatanBoard.placeSettlement(x,y,true);
+            if (bool){
+                placePiece = "road";
+            }
+            return;
+        } else if (initalPieces && placePiece.equals("road")){
+            if (CatanBoard.placeRoad(x,y,true)){
+                placePiece = "";
+                initalPieces = false;
+            }
+            return ;
+        }
+
+
+
+        CatanBoard.placeSettlement(x,y,false);
+        CatanBoard.placeRoad(x,y,false);
 
         if (makeTrade){
             catanTrade.createTrade(x, y);

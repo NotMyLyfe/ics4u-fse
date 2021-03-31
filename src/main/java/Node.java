@@ -23,6 +23,9 @@ public class Node{
     }
 
     public void placeSettlement(Color cc){
+        if (isCity){
+            return;
+        }
         isSettlement = true;
         c = cc;
     }
@@ -37,10 +40,10 @@ public class Node{
         int y1 = hex.hexagonNode(p)[1];
         g.setColor(c);
         if (isSettlement) {
-            g.fillOval(x1 - 5, y1 - 5, 10, 10);
+            g.fillRect(x1-7,y1-7,14,14);
         }
         if (isCity){
-            g.fillRect(x1-7,y1-7,14,14);
+            g.fillOval(x1 - 10, y1 - 10, 20, 20);
         }
     }
 
