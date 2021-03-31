@@ -113,7 +113,10 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
 
         CatanBoard.placeSettlement(x,y);
         CatanBoard.placeRoad(x,y);
-        catanTrade.createTrade(x, y);
+        if (makeTrade){
+            catanTrade.createTrade(x, y);
+        }
+
 
         if (800 < x && x < 900 && 700 < y && y < 800 && !makeTrade && rollDice) {
             makeTrade = true;
@@ -142,10 +145,12 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
                 makeTrade = false;
                 catanTrade = new Trade();
             }
-            /*
+
             if (800 < x && x < 900 && 500 < y && y < 600){
+                makeTrade = false;
                 //send it to the server
-            }*/
+                catanTrade = new Trade();
+            }
         }
 
     }
