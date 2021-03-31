@@ -98,7 +98,7 @@ public class Board{
         return false;
     }
 
-    public boolean placeSettlement(int x, int y){
+    public boolean placeSettlement(int x, int y, boolean start){
         if (!placingSettlement) {
             placingSettlement = selectNode(x,y);
             if (placingSettlement){
@@ -107,16 +107,21 @@ public class Board{
 
         } else {
             if (compareDist(selectedNode.hex.hexagonNode(selectedNode.p)[0],selectedNode.hex.hexagonNode(selectedNode.p)[1],x,y, SELECTIONRADIUS)) {
-                allNodes.get(index).placeSettlement(Color.white);
+                if (allNodes.get(index).isSettlement && !start){
+                    allNodes.get(index).placeCity();
+                } else {
+                    allNodes.get(index).placeSettlement(Color.white);
+                }
             }
             placingSettlement = false;
+            return true;
             //minus resources
         }
         //return false if not enough resources
-        return true;
+        return false;
     }
 
-    public boolean placeRoad(int x, int y){
+    public boolean placeRoad(int x, int y, boolean start){
         if (!placingRoad){
             placingRoad = selectEdge(x,y);
             if (placingRoad){
@@ -130,7 +135,12 @@ public class Board{
             int x2 = n2.hex.hexagonNode(n2.p)[0];
             int y2 = n2.hex.hexagonNode(n2.p)[1];
             if (compareDist((float) ((x1+x2)/2.0) , (float) ((y1+y2)/2.0),x,y,SELECTIONRADIUS)){
-                allEdges.get(index).makeRoad(Color.white);
+                if (start){
+                    //see if we can actually add it
+                    allEdges.get(index).makeRoad(Color.white);
+                } else {
+                    allEdges.get(index).makeRoad(Color.white);
+                }
                 System.out.println(index);
             }
             placingRoad = false;

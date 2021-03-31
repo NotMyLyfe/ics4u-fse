@@ -23,7 +23,10 @@ public class Edge{
     public void draw(Graphics g){
         g.setColor(c);
         if (isRoad){
-            g.drawLine(node1.hex.hexagonNode(node1.p)[0],node1.hex.hexagonNode(node1.p)[1],node2.hex.hexagonNode(node2.p)[0],node2.hex.hexagonNode(node2.p)[1]);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setStroke(new BasicStroke(5));
+            g2.drawLine(node1.hex.hexagonNode(node1.p)[0],node1.hex.hexagonNode(node1.p)[1],node2.hex.hexagonNode(node2.p)[0],node2.hex.hexagonNode(node2.p)[1]);
+            g2.setStroke(new BasicStroke(1));
         }
     }
 
