@@ -7,7 +7,7 @@ public class Trade{
             WOOL = 3,
             ORE = 4,
             BRICK = 5;
-    int[] resources = {0,0,0,0,1,0};
+    int[] resources = {0,0,0,0,0,0};
     boolean isTrade = false;
 
     public Trade(){
@@ -47,9 +47,9 @@ public class Trade{
             g.drawRect(i * 100 + 400, 700, 100, 100);
             g.drawRect(i * 100 + 400, 600, 100, 100);
             if (resources[i] > 0){
-                g.drawString(""+resources[i],i * 100 + 400, 600);
+                g.drawString(""+resources[i],i * 100 + 400+30, 670);
             } else if (resources[i] < 0){
-                g.drawString(""+(-resources[i]),i * 100 + 400, 700);
+                g.drawString(""+(-resources[i]),i * 100 + 400+30, 770);
             }
         }
     }
