@@ -28,7 +28,7 @@ public class CatanGame extends JFrame{
     }
 
     public static void main(String[] arguments) {
-        webSocketClient = new WebSocketClient("ws://localhost:8080/websocket/path");
+        /*webSocketClient = new WebSocketClient("ws://localhost:8080/websocket/path");
         while(!webSocketClient.hasAttempted()) System.out.print("");
         while(!webSocketClient.isConnected()){
             System.out.println("Failed to connect, would you like to try again? (y for yes, n for no)");
@@ -107,6 +107,8 @@ public class CatanGame extends JFrame{
                 while(waitResponse.get()) System.out.print("");
             }
         }
+        */
+        AtomicReference<JsonObject> gameData = new AtomicReference<>();
 
         CatanGame frame = new CatanGame(gameData.get());
     }
@@ -147,13 +149,11 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
 
         keys = new boolean[KeyEvent.KEY_LAST + 1];
 
-        System.out.println(gameData);
-
         myTimer = new Timer(100, this);
         setFocusable(true);
         requestFocus();
         //get it from server.
-        CatanBoard = new Board(gameData.get("hexagons"),comicFnt);
+        CatanBoard = new Board(testboard,comicFnt);
         catanPlayer = new Player(true, Color.white);
     }
 
