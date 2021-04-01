@@ -135,9 +135,10 @@ public class Board{
             }
             placingRoad = false;
             //minus resources
+            return true;
         }
         //return false if not enough resources
-        return true;
+        return false;
     }
 
     public void setSettlement(Node n, Color c){

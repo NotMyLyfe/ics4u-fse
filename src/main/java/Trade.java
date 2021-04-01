@@ -31,11 +31,8 @@ public class Trade{
         return true;
     }
 
-    public void makeTrade(Player p){
-        isTrade = true;
-        for (int i = 1; i < 6; i ++){
-            p.resources[i] += resources[i];
-        }
+    public void makeBank(Player p){
+
     }
 
     public void createTrade(int x, int y){
@@ -91,4 +88,6 @@ public class Trade{
             }
         }
     }
+
+
 }

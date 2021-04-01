@@ -9,6 +9,8 @@ public class Player{
             ORE = 4,
             BRICK = 5;
     public int[] resources = {0,0,0,0,0,0};
+    public int[] tradevals = {0,4,4,4,4,4};
+    public boolean tradeWithBank = false;
     public Color color;
     public boolean turn;
     public int victory = 0;

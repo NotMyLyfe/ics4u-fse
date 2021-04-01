@@ -40,8 +40,15 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
     private boolean useDevCard = false;
     Trade catanTrade = new Trade();
     int x = 0,y = 0;
+
     Image backbutton = new ImageIcon("src/main/java/backbutton.png").getImage();
     Image sendTrade = new ImageIcon("src/main/java/sendtrade.png").getImage();
+    Image chooseTrade = new ImageIcon("src/main/java/Trade.png").getImage();
+    Image chooseDice = new ImageIcon("src/main/java/Dice.png").getImage();
+    Image utiliseDevCard = new ImageIcon("src/main/java/usedevcard.png").getImage();
+    Image getDevCard = new ImageIcon("src/main/java/adddevcard.png").getImage();
+    Image finishTurn = new ImageIcon("src/main/java/finishturn.png").getImage();
+    Image bank = new ImageIcon("src/main/java/bank.png").getImage();
 
     public static final int WIDTH = 1000, HEIGHT = 800;
     Player catanPlayer;
@@ -109,6 +116,9 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
                 g.drawRect(800,500,100,100);
                 g.drawImage(sendTrade,800,500,null);
 
+                g.drawRect(700,500,100,100);
+                g.drawImage(bank,700,500,null);
+
 
                 catanTrade.displayTrade(g);
                 //display + and -
@@ -116,18 +126,24 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
             } else if (useDevCard){
                 //draw back
                 g.drawRect(900,500,100,100);
+                g.drawImage(backbutton,900,500,null);
                 catanPlayer.drawDevCards(g);
             } else {
                 //end turn
                 g.drawRect(500,700,100,100);
+                g.drawImage(finishTurn, 500, 700, null);
                 //use dev Card button
                 g.drawRect(600,700,100,100);
+                g.drawImage(utiliseDevCard,600,700,null);
                 //buy dev Card button
                 g.drawRect(700,700,100,100);
+                g.drawImage(getDevCard,700,700,null);
                 //trade button
                 g.drawRect(800,700,100,100);
+                g.drawImage(chooseTrade,800,700,null);
                 //roll dice button
                 g.drawRect(900,700,100,100);
+                g.drawImage(chooseDice,900,700,null);
             }
         }
     }
@@ -208,6 +224,10 @@ class Catan extends JPanel implements MouseListener, ActionListener, KeyListener
                 makeTrade = false;
                 //send it to the server
                 catanTrade = new Trade();
+            }
+
+            if (700 < x && x < 800 && 500 < y && y < 600){
+                catanTrade.makeBank(catanPlayer);
             }
         }
 

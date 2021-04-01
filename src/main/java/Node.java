@@ -43,7 +43,7 @@ public class Node{
             g.fillRect(x1-7,y1-7,14,14);
         }
         if (isCity){
-            g.fillOval(x1 - 10, y1 - 10, 20, 20);
+            g.fillOval(x1 - 20, y1 - 20, 40, 40);
         }
     }
 
