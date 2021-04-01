@@ -20,6 +20,31 @@ public class Board{
     private ArrayList<Node> allNodes = new ArrayList<>();
     private ArrayList<Edge> allEdges = new ArrayList<>();
 
+    /*const HARBOUR_LOC = [
+            [0, 0, NODE.NORTH, NODE.NORTH_WEST],
+            [0, 1, NODE.NORTH, NODE.NORTH_EAST],
+            [1, 0, NODE.NORTH_WEST, NODE.SOUTH_WEST],
+            [1, 3, NODE.NORTH, NODE.NORTH_EAST],
+            [2, 4, NODE.NORTH_EAST, NODE.SOUTH_EAST],
+            [3, 1, NODE.NORTH_WEST, NODE.SOUTH_WEST],
+            [3, 4, NODE.SOUTH, NODE.SOUTH_EAST],
+            [4, 2, NODE.SOUTH, NODE.SOUTH_WEST],
+            [4, 3, NODE.SOUTH, NODE.SOUTH_EAST]
+            ];*/
+    private final int[][] HARBORLOC = {
+            {0,0,0,5},
+            {0,1,0,1},
+            {1,0,5,4},
+            {1,3,0,1},
+            {2,4,1,2},
+            {3,1,5,4},
+            {3,4,3,2},
+            {4,2,3,4},
+            {4,3,3,2}
+    };
+    public int[] harborTypes = new int[9];
+
+
     public Board(int[][] info, Font f){
         cmcFnt = f;
         for(int i = 0; i < 19; i++){

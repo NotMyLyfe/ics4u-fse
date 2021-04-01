@@ -9,7 +9,9 @@ public class Trade{
             ORE = 4,
             BRICK = 5;
     int[] resources = {0,0,0,0,0,0};
-    boolean isTrade = false;
+    int bankCounter = 0;
+
+    public boolean tradeWithBank = false;
 
     private Image lumber = new ImageIcon("src/main/java/Lumberbig.png").getImage();
     private Image brick = new ImageIcon("src/main/java/brickbig.png").getImage();
@@ -32,10 +34,32 @@ public class Trade{
     }
 
     public void makeBank(Player p){
-
+        tradeWithBank = !tradeWithBank;
     }
 
-    public void createTrade(int x, int y){
+    public void createTrade(int x, int y, Player p){
+        if (tradeWithBank){
+            for (int i = 1; i < 6; i ++){
+
+                if (i*100+400 < x && x < i*100 + 500 && 600 < y && y < 700){
+                    if (resources[i] >= 0){
+                        resources[i] ++;
+                    } else {
+                        resources[i] += p.tradevals[i];
+                    }
+                    bankCounter -= 1;
+                }
+                if (i*100+400 < x && x < i*100 + 500 && 700 < y && y < 800){
+                    if (resources[i] > 0){
+                        resources[i] --;
+                    } else {
+                        resources[i] -= p.tradevals[i];
+                    }
+                    bankCounter ++;
+                }
+            }
+            return;
+        }
         for (int i = 1; i < 6; i ++){
 
             if (i*100+400 < x && x < i*100 + 500 && 600 < y && y < 700){

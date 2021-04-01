@@ -10,7 +10,8 @@ public class Player{
             BRICK = 5;
     public int[] resources = {0,0,0,0,0,0};
     public int[] tradevals = {0,4,4,4,4,4};
-    public boolean tradeWithBank = false;
+
+
     public Color color;
     public boolean turn;
     public int victory = 0;
@@ -64,7 +65,7 @@ public class Player{
     public void displayResources(Graphics g){
         for (int i = 1; i < 6; i ++){
             g.setColor(Color.black);
-            g.drawString(""+resources[i],i*100-50,750);
+            g.drawString(""+resources[i],i*80-40,750);
         }
     }
 }
