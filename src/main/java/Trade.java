@@ -10,9 +10,9 @@ public class Trade{
             BRICK = 5;
     int[] resources = {0,0,0,0,0,0};
     int bankCounter = 0;
-
+    //trade with bank
     public boolean tradeWithBank = false;
-
+    //import images
     private Image lumber = new ImageIcon("src/main/java/Lumberbig.png").getImage();
     private Image brick = new ImageIcon("src/main/java/brickbig.png").getImage();
     private Image sheep = new ImageIcon("src/main/java/sheepbig.png").getImage();
@@ -23,7 +23,7 @@ public class Trade{
     public Trade(){
 
     }
-
+    //check if we can trade
     public boolean canTrade(Player p){
         for (int i = 1; i < 6; i ++){
             if (-resources[i] > p.resourceNum(i)){
@@ -32,15 +32,23 @@ public class Trade{
         }
         return true;
     }
-
+    //change trade with bank
     public void makeBank(Player p){
-        tradeWithBank = !tradeWithBank;
+        if (tradeWithBank){
+            tradeWithBank = false;
+        } else {
+            tradeWithBank = true;
+        }
+        bankCounter = 0;
     }
 
     public void createTrade(int x, int y, Player p){
+        //if we are trading with bank
         if (tradeWithBank){
+            //check each resource
             for (int i = 1; i < 6; i ++){
-
+                //add resource: if we are negative, reduce it by the trading amount
+                //otherwise add one
                 if (i*100+400 < x && x < i*100 + 500 && 600 < y && y < 700){
                     if (resources[i] >= 0){
                         resources[i] ++;
@@ -49,6 +57,8 @@ public class Trade{
                     }
                     bankCounter -= 1;
                 }
+                //similar thing happens here: if we are positive, reduce it by the normal amount
+                //otherwise reduce it by the trading amount
                 if (i*100+400 < x && x < i*100 + 500 && 700 < y && y < 800){
                     if (resources[i] > 0){
                         resources[i] --;
@@ -60,8 +70,9 @@ public class Trade{
             }
             return;
         }
+        //if we arent trading with the bank, trade like normal
         for (int i = 1; i < 6; i ++){
-
+            //update resources
             if (i*100+400 < x && x < i*100 + 500 && 600 < y && y < 700){
                 resources[i] += 1;
             }
@@ -72,10 +83,12 @@ public class Trade{
     }
 
     public void displayTrade(Graphics g){
-        for (int i = 1; i < 6; i ++) {
-            int centerx = i*100+400;
+        //for each trade
+        for (int type = 1; type < 6; type ++) {
+            //get the centerx and centery of each image position
+            int centerx = type*100+400;
             int centery = 600;
-            int type = i;
+            //draw each resource image
             if (type == GRAIN){
                 g.drawImage(wheat,centerx,centery,null);
             } else if (type == LUMBER){
@@ -89,6 +102,7 @@ public class Trade{
             } else {
                 //g.setColor(sand);
             }
+            //add 100 to centery and do the exact same thing but 100 down
             centery += 100;
             if (type == GRAIN){
                 g.drawImage(wheat,centerx,centery,null);
@@ -103,12 +117,15 @@ public class Trade{
             } else {
                 //g.setColor(sand);
             }
-            g.drawRect(i * 100 + 400, 700, 100, 100);
-            g.drawRect(i * 100 + 400, 600, 100, 100);
-            if (resources[i] > 0){
-                g.drawString(""+resources[i],i * 100 + 400+30, 670);
-            } else if (resources[i] < 0){
-                g.drawString(""+(-resources[i]),i * 100 + 400+30, 770);
+            //draw all the rects boxes
+            g.drawRect(type * 100 + 400, 700, 100, 100);
+            g.drawRect(type * 100 + 400, 600, 100, 100);
+            //if we have position resources +
+            if (resources[type] > 0){
+                g.drawString(""+resources[type],type * 100 + 400+30, 670);
+                //if we have position resources -
+            } else if (resources[type] < 0){
+                g.drawString(""+(-resources[type]),type * 100 + 400+30, 770);
             }
         }
     }

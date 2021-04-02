@@ -19,6 +19,7 @@ public class Player{
 
 
     public Player(boolean tt, Color cc){
+        //set the turn and cc
         turn = tt;
         color = cc;
     }
@@ -32,6 +33,7 @@ public class Player{
     }
 
     public void acceptTrade(int[] trade){
+        //update resources
         for (int i = 1; i < 6; i ++){
             resources[i] += trade[i];
         }
@@ -42,6 +44,7 @@ public class Player{
     }
 
     public void useDevCard(String type){
+        //minus the dev card
         for (int i = 0; i < devCards.size(); i ++) {
             if (devCards.get(i).type.equals(type)) {
                 devCards.remove(i);
@@ -51,19 +54,17 @@ public class Player{
     }
 
     public void drawDevCards(Graphics g){
+        //draw each dev card (100/200)
         for (int i = 0; i < devCards.size(); i ++){
             devCards.get(i).draw(g, 900-i*100,800);
         }
     }
 
-    public void playDevCard(int x, int y){
-        for (int i = 0; i < devCards.size(); i ++){
 
-        }
-    }
 
     public void displayResources(Graphics g){
         for (int i = 1; i < 6; i ++){
+            //for each resources display it
             g.setColor(Color.black);
             g.drawString(""+resources[i],i*80-40,750);
         }
