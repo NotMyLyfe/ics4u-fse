@@ -1,3 +1,6 @@
+//Evan Lu
+//Board.java
+//display the board with hexagons, nodes, settlements, roads, etc.
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

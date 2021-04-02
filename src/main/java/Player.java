@@ -1,3 +1,6 @@
+//Evan Lu
+//Player.java
+//general info about the player
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -49,6 +52,14 @@ public class Player{
             if (devCards.get(i).type.equals(type)) {
                 devCards.remove(i);
                 return;
+            }
+        }
+    }
+
+    public void playDevCard(int x,int y){
+        for (int i = 0; i < devCards.size(); i ++){
+            if (1000-100*i > x && x > 900-100*i && 700 < y && y < 900){
+                useDevCard(devCards.get(i).type);
             }
         }
     }

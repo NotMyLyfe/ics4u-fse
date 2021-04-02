@@ -1,3 +1,8 @@
+
+//Evan Lu
+//Hexagon.java
+//Hexagon class to deal with annoying hexagons
+//can use hexagon and positioning to access nodes
 import javax.swing.*;
 import java.awt.*;
 

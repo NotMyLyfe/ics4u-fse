@@ -1,4 +1,7 @@
-import java.util.*;
+//Evan Lu
+//Node.java
+//node class and functionality
+
 import java.awt.*;
 public class Node{
     //setup stuff

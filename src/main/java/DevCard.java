@@ -1,3 +1,7 @@
+//Evan Lu
+//DevCard.java
+//dev card class
+
 import java.awt.*;
 
 public class DevCard{

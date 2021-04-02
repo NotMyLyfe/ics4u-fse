@@ -1,3 +1,6 @@
+//Evan Lu
+//Edge.java
+//Edge class between nodes, and includes road functionality
 import java.awt.*;
 
 public class Edge{

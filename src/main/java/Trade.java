@@ -1,3 +1,6 @@
+//Evan Lu
+//Trade.java
+//basic info about the trade, and functionality for trading in catan
 import javax.swing.*;
 import java.awt.*;
 

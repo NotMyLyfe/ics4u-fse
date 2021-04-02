@@ -1,6 +1,6 @@
 //Evan Lu
-// Tetris.java
-//simple tetris game
+// CatanGame.java
+//Catan UI
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
